@@ -3,27 +3,28 @@ import { View, TextInput, Button, Text } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "../../hooks/useAuth";
 
-export default function Login() {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth();
+  const [fullName, setFullName] = useState("");
+  const { register } = useAuth();
   const router = useRouter();
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     try {
-      await login(email, password);
-      router.replace("/app/dashboard");
+      await register(email, password, fullName);
+      router.replace("/(app)/dashboard");
     } catch {
-      alert("Erreur de connexion");
+      alert("Erreur d'inscription");
     }
   };
 
   return (
     <View style={{ padding: 20 }}>
+      <TextInput placeholder="Nom complet" value={fullName} onChangeText={setFullName} />
       <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
       <TextInput placeholder="Mot de passe" secureTextEntry value={password} onChangeText={setPassword} />
-      <Button title="Connexion" onPress={handleLogin} />
-      <Text onPress={() => router.push("/auth/register")}>Pas encore inscrit ?</Text>
+      <Button title="Inscription" onPress={handleRegister} />
     </View>
   );
 }

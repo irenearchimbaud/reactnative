@@ -6,5 +6,5 @@ export default function Index() {
 
   if (loading) return null;
 
-  return user ? <Redirect href="/(app)/dashboard" /> : <Redirect href="/(auth)/login" />;
+  return user ? <Redirect href="/app/dashboard" /> : <Redirect href="/auth/login" />;
 }

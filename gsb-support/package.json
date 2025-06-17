@@ -1,7 +1,7 @@
 {
   "name": "gsb-support",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "index.tsx",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -20,7 +20,9 @@
     "expo-status-bar": "~2.2.3",
     "firebase": "^11.9.1",
     "react": "19.0.0",
-    "react-native": "0.79.3"
+    "react-dom": "19.0.0",
+    "react-native": "0.79.3",
+    "react-native-web": "^0.20.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
