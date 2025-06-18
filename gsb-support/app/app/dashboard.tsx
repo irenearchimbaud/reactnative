@@ -26,17 +26,16 @@ export default function Dashboard() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Bienvenue {user?.email || 'utilisateur'} 🎉</Text>
 
       <TouchableOpacity
         style={styles.card}
         onPress={() => router.push('/app/ticket/createTicket')}
       >
-        <Text style={styles.cardTitle}>📝 Créer un ticket</Text>
-        <Text style={styles.cardText}>Signaler un nouveau problème technique</Text>
+        <Text style={styles.cardTitle}>➕ Nouveau ticket</Text>
+        <Text style={styles.cardText}>Signalez un problème à l'équipe IT</Text>
       </TouchableOpacity>
 
-      <Text style={styles.subtitle}>🎫 Vos tickets</Text>
+      <Text style={styles.subtitle}>Vos tickets</Text>
       <FlatList
         data={userTickets}
         keyExtractor={(item) => item.id}
@@ -46,9 +45,10 @@ export default function Dashboard() {
             onPress={() => router.push(`/app/ticket/${item.id}`)}
           >
             <Text style={styles.ticketTitle}>{item.title}</Text>
-            <Text style={styles.ticketStatus}>{item.status} • {item.priority}</Text>
+            <Text style={styles.ticketMeta}>{item.status.toUpperCase()} • {item.priority.toUpperCase()}</Text>
           </TouchableOpacity>
         )}
+        ListEmptyComponent={<Text style={styles.empty}>Aucun ticket pour le moment.</Text>}
       />
 
       <TouchableOpacity style={styles.logoutButton} onPress={logout}>
@@ -61,60 +61,63 @@ export default function Dashboard() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f8fc',
-    padding: 24,
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#003366',
-    textAlign: 'center',
+    backgroundColor: '#f0f4f8',
+    padding: 20,
   },
   subtitle: {
     fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    marginTop: 20,
-    color: '#333',
+    fontWeight: '600',
+    color: '#1a3c5a',
+    marginVertical: 10,
   },
   card: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 20,
-    marginBottom: 20,
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    padding: 16,
     shadowColor: '#000',
-    shadowOpacity: 0.1,
     shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 4,
-    elevation: 3,
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 4,
   },
   cardTitle: {
     fontSize: 18,
     fontWeight: '600',
-    marginBottom: 6,
     color: '#0066cc',
+    marginBottom: 4,
   },
   cardText: {
     fontSize: 14,
-    color: '#444',
+    color: '#555',
   },
   ticketCard: {
     backgroundColor: '#ffffff',
+    borderRadius: 8,
     padding: 14,
-    borderRadius: 10,
     marginBottom: 10,
-    borderColor: '#ddd',
-    borderWidth: 1,
+    borderLeftWidth: 4,
+    borderLeftColor: '#0066cc',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
+    elevation: 2,
   },
   ticketTitle: {
     fontSize: 16,
     fontWeight: '600',
-    marginBottom: 4,
+    color: '#003366',
   },
-  ticketStatus: {
+  ticketMeta: {
+    fontSize: 13,
+    color: '#777',
+    marginTop: 4,
+  },
+  empty: {
     fontSize: 14,
-    color: '#555',
+    color: '#999',
+    textAlign: 'center',
+    marginTop: 30,
   },
   logoutButton: {
     marginTop: 30,
