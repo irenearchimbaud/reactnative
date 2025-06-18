@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { View, TextInput, Button, Text } from "react-native";
+import { View, TextInput, Button, Text, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "../../hooks/useAuth";
+import { Link } from "expo-router";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -19,11 +20,21 @@ export default function Login() {
   };
 
   return (
-    <View style={{ padding: 20 }}>
+    <View style={styles.container}>
       <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
       <TextInput placeholder="Mot de passe" secureTextEntry value={password} onChangeText={setPassword} />
       <Button title="Connexion" onPress={handleLogin} />
-      <Text onPress={() => router.push("/auth/register")}>Pas encore inscrit ?</Text>
+      <Link href={"/auth/register"}>Pas encore inscrit ?</Link>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+    container : {
+        flex: 1, 
+        padding: 24,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+    }
+})
